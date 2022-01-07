@@ -3,7 +3,7 @@ package dsg
 import "fmt"
 import "testing"
 
-func int_ktoi (key dsg.Key) (ind []int) {
+func int_ktoi (key Key) (ind []int) {
       k := key.(int)
       ind = make ([]int, 3)
       ind[0] = k / 1000
@@ -18,10 +18,10 @@ func TestHash (t * testing.T) {
       var logstr string
 
       n := []int{8, 10, 10}
-      hash := dsg.InitTreeHash (n, int_ktoi, dsg.IntCompFunc)
+      hash := InitTreeHash (n, int_ktoi, IntCompFunc)
 
       var key int
-      var value dsg.Value
+      var value Value
 
       for i = 0; i < 8000; i += 3 {
             key = i

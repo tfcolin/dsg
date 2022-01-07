@@ -1,33 +1,35 @@
 package dsg
 
 import "testing"
+import "fmt"
 
-func PrintSet (set * dsg.Set, name string) {
+func PrintSet (set * Set, name string) (logstr string) {
       var i int
       var labels []int = set.GetAllLabel ()
 
-      t.Logf ("%s = { ", name)
+      logstr += fmt.Sprintf ("%s = { ", name)
       for i = 0; i < len(labels); i ++ {
-            t.Logf ("%5d", labels[i])
+            logstr += fmt.Sprintf ("%5d", labels[i])
       }
-      t.Logf (" }\n")
+      logstr += fmt.Sprintf (" }\n")
+      return 
 }
 
-func main () {
+func TestSet (t *testing.T) {
       var i int
       size := 21
 
       var s1 []bool = []bool{false,false,true,true,true,false,false,true,false,false,true,true,false,true,false,true,true,false,true,false,true}
       var s2 []bool = []bool{true,false,false,false,true,false,true,false,true,false,true,true,false,false,false,true,true,true,true,false,false}
 
-      set1 := dsg.InitSet (size)
-      set2 := dsg.InitSet (size)
-      setu := dsg.InitSet (size)
-      seti := dsg.InitSet (size)
-      setc := dsg.InitSet (size)
-      setd := dsg.InitSet (size)
-      sete := dsg.InitSet (size)
-      setf := dsg.InitSet (size)
+      set1 := InitSet (size)
+      set2 := InitSet (size)
+      setu := InitSet (size)
+      seti := InitSet (size)
+      setc := InitSet (size)
+      setd := InitSet (size)
+      sete := InitSet (size)
+      setf := InitSet (size)
 
       setf.Full ()
 
@@ -41,14 +43,16 @@ func main () {
       setc.Co (set1)
       setd.Diff (set1, set2)
 
-      PrintSet (set1, "S1")
-      PrintSet (set2, "S2")
-      PrintSet (setu, "Union")
-      PrintSet (seti, "Intersection")
-      PrintSet (setc, "Complement")
-      PrintSet (setd, "Difference")
-      PrintSet (sete, "Empty")
-      PrintSet (setf, "Full")
+      t.Log(PrintSet (set1, "S1"))
+      t.Log(PrintSet (set2, "S2"))
+      t.Log(PrintSet (setu, "Union"))
+      t.Log(PrintSet (seti, "Intersection"))
+      t.Log(PrintSet (setc, "Complement"))
+      t.Log(PrintSet (setd, "Difference"))
+      t.Log(PrintSet (sete, "Empty"))
+      t.Log(PrintSet (setf, "Full"))
+
       set2.Empty ()
-      PrintSet (set2, "AfterEmpty")
+
+      t.Log(PrintSet (set2, "AfterEmpty"))
 }

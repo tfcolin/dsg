@@ -1,12 +1,14 @@
 package dsg
 
 import "testing"
+import "fmt"
 
 func TestList (t * testing.T) {
       var i int
+      var logstr string
 
       // for llist
-      ll := dsg.InitLList (10)
+      ll := InitLList (10)
 
       u1 := ll.Pop()
       u2 := ll.PopFirst()
@@ -14,7 +16,7 @@ func TestList (t * testing.T) {
       u4 := ll.GetLast()
 
       if u1 == nil && u2 == nil && u3 == nil && u4 == nil {
-            t.Logf ("All Nils.\n")
+            logstr += fmt.Sprintf ("All Nils.\n")
       }
 
       for i = 20; i > 0; i -= 2 {
@@ -22,9 +24,9 @@ func TestList (t * testing.T) {
       }
 
       for i = 0; i < ll.GetN(); i ++ {
-            t.Logf("%6d", *ll.Get(i))
+            logstr += fmt.Sprintf("%6d", *ll.Get(i))
       }
-      t.Logf ("\n")
+      logstr += fmt.Sprintf ("\n")
 
       v1 := ll.Pop()
       v2 := ll.Pop()
@@ -33,11 +35,11 @@ func TestList (t * testing.T) {
       v5 := *ll.GetLast()
 
       for i = 0; i < ll.GetN(); i ++ {
-            t.Logf("%6d", *ll.Get(i))
+            logstr += fmt.Sprintf("%6d", *ll.Get(i))
       }
-      t.Logf ("\n")
+      logstr += fmt.Sprintf ("\n")
 
-      t.Logf ("%6d%6d%6d%6d%6d\n", v1, v2, v3, v4, v5)
+      logstr += fmt.Sprintf ("%6d%6d%6d%6d%6d\n", v1, v2, v3, v4, v5)
 
       ll.Flush()
 
@@ -47,8 +49,10 @@ func TestList (t * testing.T) {
       u4 = ll.GetLast()
 
       if u1 == nil && u2 == nil && u3 == nil && u4 == nil {
-            t.Logf ("All Nils.\n")
+            logstr += fmt.Sprintf ("All Nils.\n")
       }
 
-      t.Logf ("Number of Elem. = %d\n", ll.GetN())
+      logstr += fmt.Sprintf ("Number of Elem. = %d\n", ll.GetN())
+
+      t.Log (logstr)
 }
